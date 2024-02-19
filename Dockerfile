@@ -8,10 +8,20 @@ ENV PYTHONUNBUFFERED 1
 # Set work directory
 WORKDIR /app
 
+# Copy entrypoint script into the image
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+COPY wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
+
+
+# Set the entrypoint script to be executed
+ENTRYPOINT ["/entrypoint.sh"]
+
+
 # Install dependencies
 COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
-RUN python manage.py migrate
 
 # Copy the current directory contents into the container at /app
 COPY . /app/

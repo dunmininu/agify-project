@@ -87,11 +87,11 @@ DATABASES = {
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
     "default": {
-        'ENGINE': 'django_tenants.postgresql_backend',
+        'ENGINE': 'django.db.backends.postgresql',
         "NAME": config("DB_NAME", 'agify_db'),
         "USER": config("DB_USER", 'postgres'),
         "PASSWORD": config("DB_PASSWORD", ''),
-        "HOST": config("DB_HOST", 'localhost'),
+        "HOST": config("DB_HOST", 'db'),
         "PORT": config("DB_PORT", '5432', cast=int),
         "ATOMIC_REQUESTS": True,
     },
