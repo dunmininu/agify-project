@@ -11,6 +11,7 @@ WORKDIR /app
 # Install dependencies
 COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN python manage.py migrate
 
 # Copy the current directory contents into the container at /app
 COPY . /app/
