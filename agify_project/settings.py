@@ -22,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY' ,'django-insecure-)8&3haid-dkp98!r&^i4!h1a*)xw48v0ui5hm#)n=(y43g_a%8')
+SECRET_KEY = config('SECRET_KEY', 'django-insecure-)8&3haid-dkp98!r&^i4!h1a*)xw48v0ui5hm#)n=(y43g_a%8')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', True)
 
 ALLOWED_HOSTS = []
 
@@ -82,10 +82,19 @@ WSGI_APPLICATION = 'agify_project.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    "default": {
+        'ENGINE': 'django_tenants.postgresql_backend',
+        "NAME": config("DB_NAME", 'agify_db'),
+        "USER": config("DB_USER", 'postgres'),
+        "PASSWORD": config("DB_PASSWORD", ''),
+        "HOST": config("DB_HOST", 'localhost'),
+        "PORT": config("DB_PORT", '5432', cast=int),
+        "ATOMIC_REQUESTS": True,
+    },
 }
 
 
