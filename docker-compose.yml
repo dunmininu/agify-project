@@ -18,7 +18,12 @@ services:
     ports:
       - "8000:8000"
     environment:
-      DATABASE_URL: postgresql://postgres:password@db/agify_db
+      - DB_NAME=agify_db
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DATABASE_URL=postgresql://postgres:password@db:5432/agify_db
     depends_on:
       - db
 
